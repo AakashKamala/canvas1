@@ -1,6 +1,6 @@
 "use client";
 
-export function Rectangle(canvasRef: React.RefObject<HTMLCanvasElement>) {
+export function Draw(canvasRef: React.RefObject<HTMLCanvasElement>, shape: string) {
     const canvas = canvasRef.current;
 
     if (!canvas) {
@@ -34,7 +34,19 @@ export function Rectangle(canvasRef: React.RefObject<HTMLCanvasElement>) {
         const height = currentY - startY;
 
         ctx.fillStyle = 'rgba(255, 0, 0, 0.5)';
-        ctx.fillRect(startX, startY, width, height);
+        if(shape=="rect") {
+            ctx.fillRect(startX, startY, width, height);
+        }
+        if(shape=="circle") {
+
+            ctx.beginPath();
+            const radius = Math.sqrt(width * width + height * height) / 2;
+            const centerX = startX + width / 2;
+            const centerY = startY + height / 2;
+            ctx.arc(centerX, centerY, Math.abs(radius), 0, 2 * Math.PI);
+            ctx.stroke();
+
+        }
     }
 
     function handleMouseUp() {
