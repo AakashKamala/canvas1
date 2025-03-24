@@ -17,6 +17,7 @@ export default function Home() {
     window.addEventListener("resize", updateCanvasSize)
 
     updateCanvasSize()
+    
 
     return ()=>{
       window.removeEventListener("resize", updateCanvasSize)
